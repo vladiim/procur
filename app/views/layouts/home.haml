@@ -1,6 +1,17 @@
-%h1 I'm home
+- 3.times do
 
-%ul
-  %li you
-  %li mo
-  %li fo
+  .col-sm-4
+    %div{ class: 'panel panel-primary' }
+      .panel-heading
+        %h3.panel-title
+          = link_to 'Customer experience', '/services/customer-experience'
+      .panel-body
+        Description of customer experience lorem ipsum
+        .row
+          %img{ class: 'img-responsive', src: 'http://www.teamstudio.com/Portals/218295/images/istock_000001242290small.jpg' }
+      .panel-footer
+        .row
+          .col-sm-6
+            20 agencies
+          .col-sm-6
+            200 staff

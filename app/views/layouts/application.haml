@@ -58,9 +58,22 @@
         / Nokia
         / %link{:rel => "shortcut icon", :href => "/img/touch/apple-touch-icon.png"}
 
-        -# CSS
-        -# ==========================================================================
-        = stylesheet_link_tag 'bootstrap.min.css'
+        /# CSS
+        /# ==========================================================================
+        /# Bootstrap
+        / = stylesheet_link_tag 'bootstrap.min.css'
+
+        /# Bootcards
+        /= stylesheet_link_tag 'bootcards/bootcards-bootcards.css'
+        /= stylesheet_link_tag 'bootcards/bootcards-ios.css'
+        /= stylesheet_link_tag 'bootcards/bootcards-android.css'
+        /= stylesheet_link_tag 'bootcards/bootcards-desktop.css'
+        /= stylesheet_link_tag 'bootcards/bootcards-mobile-shared.css'
+
+        = stylesheet_link_tag '//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'
+        /= stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/bootcards/0.1.0/css/bootcards-ios.min.css'
+        /= stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/bootcards/0.1.0/css/bootcards-android.min.css'
+        /= stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/bootcards/0.1.0/css/bootcards-desktop.min.css'
 
         /# JS
         /# ==========================================================================
@@ -88,4 +101,6 @@
         = javascript_include_tag 'jquery.js'
 
         / Bootstrap
-        = javascript_include_tag 'bootstrap.min.js'
+        /= javascript_include_tag 'bootstrap.min.js'
+        = javascript_include_tag '//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'
+        /= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/bootcards/0.1.0/js/bootcards.min.js'
