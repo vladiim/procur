@@ -1,0 +1,8 @@
+.list-group-item .meta {
+  text-align: right;
+  margin-top: -30px;
+}
+
+.btn-vote {
+  padding: 5px 10px 5px 5px;
+}

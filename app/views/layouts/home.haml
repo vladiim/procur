@@ -1,17 +1,11 @@
-- 3.times do
+%h1 Home
 
-  .col-sm-4
-    %div{ class: 'panel panel-primary' }
-      .panel-heading
-        %h3.panel-title
-          = link_to 'Customer experience', '/services/customer-experience'
-      .panel-body
-        Description of customer experience lorem ipsum
-        .row
-          %img{ class: 'img-responsive', src: 'http://www.teamstudio.com/Portals/218295/images/istock_000001242290small.jpg' }
-      .panel-footer
-        .row
-          .col-sm-6
-            20 agencies
-          .col-sm-6
-            200 staff
+.list-group
+  - 3.times do
+    %a{ href: '/services/customer-experience', class: 'list-group-item' }
+      .heading
+        %h3.list-group-item-heading Customer experience
+        %p (CX) is the sum of all experiences a customer has with a business.
+      .meta
+        %small 20 agencies
+        %small 200 staff

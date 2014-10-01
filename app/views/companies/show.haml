@@ -1,0 +1,51 @@
+%h1= @name
+%p We solve business problems by provoking big reactions from simple interactions.
+
+%hr
+
+%h3= "What's #{ @name } good at?"
+
+%form{ role: 'form' }
+  .form-group
+    %label Add expertise
+    .input-group
+      %input{ type: 'text', class: 'form-control', placeholder: 'Digital' }
+      %span.input-group-btn
+        %button{ type: 'submit', class: 'btn btn-default' } Add
+
+%hr
+
+%h3
+  %a{ class: 'btn btn-default btn-vote' }
+    %span{ class: 'glyphicon glyphicon-arrow-up' }
+    %b 8
+  Customer experience
+.row
+  .col-sm-6
+    %h5 5 staff votes
+    - 5.times do
+      %img{ 'data-src' => 'holder.js/50x50', class: 'img-circle' }
+
+  .col-sm-6
+    %h5 3 client votes
+    - 3.times do
+      %img{ 'data-src' => 'holder.js/50x50', class: 'img-circle' }
+
+%hr
+
+%h3
+  %a{ class: 'btn btn-default btn-vote' }
+    %span{ class: 'glyphicon glyphicon-arrow-up' }
+    %b 5
+  Digital
+.row
+  .col-sm-6
+    %h5 3 staff votes
+    - 5.times do
+      %img{ 'data-src' => 'holder.js/50x50', class: 'img-circle' }
+
+  .col-sm-6
+    %h5 2 client votes
+    - 3.times do
+      %img{ 'data-src' => 'holder.js/50x50', class: 'img-circle' }
+
