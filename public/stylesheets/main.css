@@ -6,3 +6,11 @@
 .btn-vote {
   padding: 5px 10px 5px 5px;
 }
+
+.company-card {
+  padding: 10px;
+}
+
+.company-card form {
+  margin-top: 20px;
+}
