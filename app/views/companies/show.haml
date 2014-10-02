@@ -1,72 +1,65 @@
 .company-card.row
   .col-xs-3
-    %img{ 'data-src' => 'holder.js/100%x200/auto', class: 'responsive-img' }
+    %img{ 'data-src' => 'holder.js/100%x150/auto', class: 'responsive-img' }
   .col-xs-9
     %h1= @name
     %p We solve business problems by provoking big reactions from simple interactions.
     .location
       %small Sydney, Australia | Marketing and Advertising
-    .meta
-      %span{ class: 'label label-default' } 8 customer experience
-      %span{ class: 'label label-default' } 5 digital
-      %span{ class: 'label label-default' } 2 ideation
+    %ul.meta
+      %li
+        %a
+          %small Website
+        |
+      %li
+        %a
+          %small LinkedIn
+        |
+      %li
+        %a
+          %small Twitter
+        |
+      %li
+        %a
+          %small Facebook
+        |
+      %li
+        %a
+          %small Instagram
 
-    %form{ class: 'form-horizontal row', role: 'form' }
-      .form-group
-        .col-xs-3
-          %label Add expertise
-        .col-xs-9
-          .input-group
-            %input{ type: 'text', class: 'form-control', placeholder: 'Digital' }
-            %span.input-group-btn
-              %button{ type: 'submit', class: 'btn btn-default' } Add
-
-
-%hr
-
-%h3= "What's #{ @name } good at?"
-
-%form{ role: 'form' }
-  .form-group
-    %label Add expertise
-    .input-group
-      %input{ type: 'text', class: 'form-control', placeholder: 'Digital' }
-      %span.input-group-btn
-        %button{ type: 'submit', class: 'btn btn-default' } Add
 
 %hr
 
-%h3
-  %a{ class: 'btn btn-default btn-vote' }
-    %span{ class: 'glyphicon glyphicon-arrow-up' }
-    %b 8
-  Customer experience
-.row
-  .col-sm-6
-    %h5 5 staff votes
-    - 5.times do
-      %img{ 'data-src' => 'holder.js/50x50', class: 'img-circle' }
+.add-expertise.container
+  %h3= "What's #{ @name } good at?"
 
-  .col-sm-6
-    %h5 3 client votes
-    - 3.times do
-      %img{ 'data-src' => 'holder.js/50x50', class: 'img-circle' }
+  %form{ role: 'form' }
+    .form-group
+      %label Add expertise
+      .input-group
+        %input{ type: 'text', class: 'form-control', placeholder: 'Digital' }
+        %span.input-group-btn
+          %button{ type: 'submit', class: 'btn btn-default' } Add
 
 %hr
 
-%h3
-  %a{ class: 'btn btn-default btn-vote' }
-    %span{ class: 'glyphicon glyphicon-arrow-up' }
-    %b 5
-  Digital
-.row
-  .col-sm-6
-    %h5 3 staff votes
-    - 5.times do
-      %img{ 'data-src' => 'holder.js/50x50', class: 'img-circle' }
+.service.container
+  .title
+    %h3{ 'data-service' => 'customer-experience' }
+      %a{ class: 'btn btn-default btn-vote' }
+        %span{ class: 'glyphicon glyphicon-arrow-up' }
+        %b 8
+      Customer experience
 
-  .col-sm-6
-    %h5 2 client votes
-    - 3.times do
-      %img{ 'data-src' => 'holder.js/50x50', class: 'img-circle' }
+  %div{ class: 'customer-experience-votes hidden' }
+    .col-sm-6
+      %h5 5 staff votes
+      - 5.times do
+        %img{ 'data-src' => 'holder.js/50x50', class: 'img-circle profile-pic' }
 
+    .col-sm-6
+      %h5 3 client votes
+      - 3.times do
+        %img{ 'data-src' => 'holder.js/50x50', class: 'img-circle profile-pic' }
+
+%hr
