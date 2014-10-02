@@ -1,39 +1,27 @@
 .list-group-item .meta {
   text-align: right;
-  margin-top: -30px;
-}
+  margin-top: -30px; }
 
 .btn-vote {
-  padding: 5px 10px 5px 5px;
-}
+  padding: 5px 10px 5px 5px; }
 
 .company-card {
-  padding: 10px;
-}
-
-.company-card h1 {
-  margin-top: 0;
-}
-
-.company-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.company-card ul li {
-  display: inline-block;
-}
-
-.company-card form {
-  margin-top: 20px;
-}
+  padding: 10px; }
+  .company-card h1 {
+    margin-top: 0; }
+  .company-card form {
+    margin-top: 20px; }
+  .company-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+    .company-card ul li {
+      display: inline-block; }
 
 .service .title {
   padding: 10px;
-  margin: -10px;
-}
+  margin: -10px; }
+  .service .title:hover {
+    background-color: #f5f5f5; }
 
-.service .title:hover {
-  background-color: #f5f5f5;
-}
+/*# sourceMappingURL=main.css.map */

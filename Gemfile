@@ -8,10 +8,12 @@ gem 'rake', '10.3.2'
 gem 'thin', '~> 1.6.2'
 
 # Component requirements
-gem 'sass'  , '~> 3.4.5'
-gem 'haml',   '~> 4.0.5'
-gem 'pg',     '~> 0.17.1'
-gem 'sequel', '~> 4.14.0'
+gem 'rack-coffee',   '~>1.0.3', require: 'rack/coffee'
+gem 'coffee-script', '~> 2.3.0'
+gem 'sass',          '~> 3.4.5'
+gem 'haml',          '~> 4.0.5'
+gem 'pg',            '~> 0.17.1'
+gem 'sequel',        '~> 4.14.0'
 
 # Test requirements
 group :test do
