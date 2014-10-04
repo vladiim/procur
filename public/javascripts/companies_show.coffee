@@ -14,4 +14,13 @@ $( document ).ready( ->
   $( '.profile-pic' ).on 'click', ( event ) ->
     $( '.profile-pic' ).not( this ).popover( 'hide' )
 
+  $( '.btn-vote' ).on 'click', ( event ) ->
+    event.preventDefault()
+    $target = $( event.target )
+    if $target.hasClass( 'btn-vote' )
+      $num = $target.find('b')
+    else
+      $num = $target.parent( '.btn-vote' ).find('b')
+    val = parseInt( $num.text() )
+    $num.text( val++ )
 )

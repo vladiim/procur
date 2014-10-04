@@ -9,98 +9,97 @@
 
 %html.no-js{:lang => "en"}
 
-    %head
+  %head
 
-        -# ==========================================================================
-        -# Head
-        -# ==========================================================================
+    /# ==========================================================================
+    /# Head
+    /# ==========================================================================
 
-        %meta{:charset => "utf-8"}
+    %meta{:charset => "utf-8"}
 
-        %title= @title.present? ? "#{ @title }" : "Procur"
-        %meta{:name => "description", :content => ""}
-        / %meta{:name => "keywords", :content => ""}
-        / %meta{:name => "author", :content => ""}
+    %title= @title.present? ? "#{ @title }" : "Procur"
+    %meta{:name => "description", :content => ""}
+    / %meta{:name => "keywords", :content => ""}
+    / %meta{:name => "author", :content => ""}
 
-        -# Mobile
-        -# ==========================================================================
+    -# Mobile
+    -# ==========================================================================
 
-        %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
-        / %meta{:name => "HandheldFriendly", :content => "True"}
-        / %meta{:name => "MobileOptimized", :content => "320"}
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
+    / %meta{:name => "HandheldFriendly", :content => "True"}
+    / %meta{:name => "MobileOptimized", :content => "320"}
 
-        / iOS web app
-        / %meta{:name => "apple-mobile-web-app-capable", :content => "yes"}
-        / %meta{:name => "apple-mobile-web-app-status-bar-style", :content => "black"}
-        / %link{:rel => "apple-touch-startup-image", :href => "/img/touch/startup.png"}
+    / iOS web app
+    / %meta{:name => "apple-mobile-web-app-capable", :content => "yes"}
+    / %meta{:name => "apple-mobile-web-app-status-bar-style", :content => "black"}
+    / %link{:rel => "apple-touch-startup-image", :href => "/img/touch/startup.png"}
 
-        / RSS
-        / ==========================================================================
-        / %link{:rel => "alternate", :type => "application/rss+xml", :title => "RSS", :href => "http://feeds.feedburner.com/FEEDNAME"}
+    / RSS
+    / ==========================================================================
+    / %link{:rel => "alternate", :type => "application/rss+xml", :title => "RSS", :href => "http://feeds.feedburner.com/FEEDNAME"}
 
-        -# Favicon
-        -# ==========================================================================
+    -# Favicon
+    -# ==========================================================================
 
-        %link{:href => "/favicon.ico", :rel => "shortcut icon"}
+    %link{:href => "/favicon.ico", :rel => "shortcut icon"}
 
-        / iPad 3 Retina Display
-        / %link{:rel => "apple-touch-icon-precomposed", :sizes => "144x144", :href => "/img/touch/apple-touch-icon-144x144-precomposed.png"}
+    / iPad 3 Retina Display
+    / %link{:rel => "apple-touch-icon-precomposed", :sizes => "144x144", :href => "/img/touch/apple-touch-icon-144x144-precomposed.png"}
 
-        / iPhone 4 Retina display
-        / %link{:rel => "apple-touch-icon-precomposed", :sizes => "114x114", :href => "/img/touch/apple-touch-icon-114x114-precomposed.png"}
+    / iPhone 4 Retina display
+    / %link{:rel => "apple-touch-icon-precomposed", :sizes => "114x114", :href => "/img/touch/apple-touch-icon-114x114-precomposed.png"}
 
-        / iPad non-Retina display
-        / %link{:rel => "apple-touch-icon-precomposed", :sizes => "72x72", :href => "/img/touch/apple-touch-icon-72x72-precomposed.png"}
+    / iPad non-Retina display
+    / %link{:rel => "apple-touch-icon-precomposed", :sizes => "72x72", :href => "/img/touch/apple-touch-icon-72x72-precomposed.png"}
 
-        / Non-Retina iPhone, iPod Touch, Android 2.1+
-        / %link{:rel => "apple-touch-icon-precomposed", :href => "/img/touch/apple-touch-icon-57x57-precomposed.png"}
+    / Non-Retina iPhone, iPod Touch, Android 2.1+
+    / %link{:rel => "apple-touch-icon-precomposed", :href => "/img/touch/apple-touch-icon-57x57-precomposed.png"}
 
-        / Nokia
-        / %link{:rel => "shortcut icon", :href => "/img/touch/apple-touch-icon.png"}
+    / Nokia
+    / %link{:rel => "shortcut icon", :href => "/img/touch/apple-touch-icon.png"}
 
-        /# CSS
-        /# ==========================================================================
-        /# Bootstrap
-        = stylesheet_link_tag 'bootstrap.css'
-        / = stylesheet_link_tag '//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'
+    /# CSS
+    /# ==========================================================================
+    /# Bootstrap
+    = stylesheet_link_tag 'bootstrap.css'
+    / = stylesheet_link_tag '//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'
 
-        /# Bootstrap
-        = stylesheet_link_tag 'main.css'
+    /# Bootstrap
+    = stylesheet_link_tag 'main.css'
 
-        /# JS
-        /# ==========================================================================
-        /# Modernizr
-        /# %script{:src => "/js/libs/modernizr.custom.js"}
+    /# JS
+    /# ==========================================================================
+    /# Modernizr
+    /# %script{:src => "/js/libs/modernizr.custom.js"}
 
-    %body
+  %body
 
-        -# ==========================================================================
-        -# Content
-        -# ==========================================================================
+    -# ==========================================================================
+    -# Content
+    -# ==========================================================================
 
-        / = partial 'shared/nav'
+    #main.container
+      = partial 'shared/nav'
 
-        #main.container
+      = yield
 
-            = yield
+    / = partial 'shared/footer'
 
+    /# JS
+    /# ==========================================================================
 
-        / = partial 'shared/footer'
-        /# JS
-        /# ==========================================================================
+    /# jQuery
+    = javascript_include_tag 'jquery.js'
 
-        /# jQuery
-        = javascript_include_tag 'jquery.js'
+    / Bootstrap
+    = javascript_include_tag 'bootstrap.js'
+    /= javascript_include_tag '//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'
 
-        / Bootstrap
-        = javascript_include_tag 'bootstrap.js'
-        /= javascript_include_tag '//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'
+    / Holder
+    = javascript_include_tag 'ondomready.js'
+    = javascript_include_tag 'polyfills.js'
+    = javascript_include_tag 'augment.js'
+    = javascript_include_tag 'holder.js'
 
-        / Holder
-        = javascript_include_tag 'ondomready.js'
-        = javascript_include_tag 'polyfills.js'
-        = javascript_include_tag 'augment.js'
-        = javascript_include_tag 'holder.js'
-
-        / Application
-        = javascript_include_tag 'companies_show.js'
+    / Application
+    = javascript_include_tag 'companies_show.js'

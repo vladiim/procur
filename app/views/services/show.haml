@@ -1,18 +1,7 @@
 %h1= "#{ @name } companies"
 %p (CX) is the sum of all experiences a customer has with a business
 
-.list-group
-  - 3.times do
-    %a{ href: '/companies/holler', class: 'list-group-item' }
-      .heading
-        %h3.list-group-item-heading
-          %span{ class: 'label label-default' } 8
-          Holler
-        %p We solve business problems by provoking big reactions from simple interactions.
-      .meta
-        %small
-          %span.badge Customer experience
-        %small
-          %span.badge Digital
-        %small
-          %span.badge Ideation
+.container
+  .list-group
+    - 3.times do
+      = partial 'companies/item'
