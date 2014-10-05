@@ -1,12 +1,11 @@
 Procur::App.controllers :auth do
-  include Linkedin
 
   get :auth, map: '/auth' do
-    client = Linkedin.new_client(settings)
-    request_token = Linkedin.request_token(client, request)
+    linkedin = Linkedin.new(settings)
+    request_token = linkedin.request_token(request)
     session[:rtoken] = request_token.token
     session[:rsecret] = request_token.secret
-    redirect Linkedin.authorize_url(client)
+    redirect linkedin.authorize_url
   end
 
   get :callback, map: '/auth/callback' do
