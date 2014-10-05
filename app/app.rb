@@ -11,8 +11,6 @@ module Procur
 
     enable :sessions
 
-    get '/' do
-      render '/layouts/home'
-    end
+    register LinkedinInitializer
   end
 end
