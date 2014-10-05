@@ -9,18 +9,24 @@ Procur::App.controllers :auth do
   end
 
   get :callback, map: '/auth/callback' do
-    # require 'debugger'; debugger
-    client = LinkedIn::Client.new(settings.api, settings.secret)
-    if session[:atoken].nil?
-      pin = params[:oauth_verifier]
-      # require 'debugger'; debugger
-      atoken, asecret = client.authorize_from_request(session[:rtoken], session[:rsecret], pin)
-      session[:atoken] = atoken
-      session[:asecret] = asecret
-    end
-    # require 'debugger'; debugger
+    linkedin = Linkedin.new(settings)
+    linkedin.set_auth_session(session, params[:oauth_verifier])
     redirect "/"
   end
+
+  # get :callback, map: '/auth/callback' do
+  #   require 'debugger'; debugger
+  #   client = LinkedIn::Client.new(settings.api, settings.secret)
+  #   if session[:atoken].nil?
+  #     pin = params[:oauth_verifier]
+  #     # require 'debugger'; debugger
+  #     atoken, asecret = client.authorize_from_request(session[:rtoken], session[:rsecret], pin)
+  #     session[:atoken] = atoken
+  #     session[:asecret] = asecret
+  #   end
+  #   # require 'debugger'; debugger
+  #   redirect "/"
+  # end
 
   get :logout, map: "/auth/logout" do
      session[:atoken] = nil

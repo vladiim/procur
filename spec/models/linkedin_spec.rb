@@ -10,6 +10,10 @@ module LinkedIn
     def request_token(callback)
       OpenStruct.new(token: 'TOKEN', secret: 'SECRET', authorize_url: 'AUTH URL')
     end
+
+    def authorize_from_request(rtoken, rsecret, pin)
+      [ "#{ rtoken } #{ pin }", "#{ rsecret } #{ pin }" ]
+    end
   end
 end
 
@@ -43,6 +47,31 @@ RSpec.describe Linkedin do
     describe '#authorize_url' do
       it 'responds with the authorize url' do
         expect(linkedin.authorize_url).to eq 'AUTH URL'
+      end
+    end
+  end
+
+  describe '#set_auth_session' do
+    let(:pin) { 'PIN' }
+    before { linkedin.set_auth_session(session, pin) }
+
+    context 'with atoken' do
+      let(:session) { { atoken: true } }
+
+      it "doesn't change the session" do
+        expect(session).to eq({ atoken: true })
+      end
+    end
+
+    context 'without atoken' do
+      let(:session) { { rtoken: 'ATOKEN', rsecret: 'ASECRET' } }
+
+      it 'sets the session atoken' do
+        expect(session[:atoken]).to eq 'ATOKEN PIN'
+      end
+
+      it 'sets the session asecret' do
+        expect(session[:asecret]).to eq 'ASECRET PIN'
       end
     end
   end
