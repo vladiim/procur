@@ -1,6 +1,6 @@
 Procur::App.controllers :profiles do
   get :show, map: '/profiles/:id/:name' do
-    @name = StringHelper.camelise(params[:name])
+    @profile = Profile[params[:id]]
     render 'profiles/show'
   end
 end

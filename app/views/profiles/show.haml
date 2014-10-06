@@ -2,10 +2,8 @@
   .col-xs-3
     %img{ 'data-src' => 'holder.js/100%x150/auto', class: 'responsive-img' }
   .col-xs-9
-    %h1= @name
-    %p
-      Head of CX @
-      %a Holler
+    %h1= @profile.fullname
+    %p= @profile.headline
     %ul
       %li
         %a
