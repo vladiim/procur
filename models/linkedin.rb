@@ -6,9 +6,11 @@ class Linkedin
   end
 
   attr_reader :req_token
-  def request_token(request)
+  def set_request_session(request, session)
     callback = "http://#{request.host}:#{request.port}/auth/callback"
     @req_token = client.request_token(oauth_callback: callback)
+    session[:rtoken] = req_token.token
+    session[:rsecret] = req_token.secret
   end
 
   def authorize_url

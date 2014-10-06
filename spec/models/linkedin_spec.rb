@@ -27,21 +27,17 @@ RSpec.describe Linkedin do
     end
   end
 
-  describe '#request_token' do
-    let(:request)   { OpenStruct.new(host: 'HOST', port: 'PORT') }
-    let(:req_token) { linkedin.request_token(request) }
-    before { req_token }
+  describe '#set_request_session' do
+    let(:request) { OpenStruct.new(host: 'HOST', port: 'PORT') }
+    let(:session) { {} }
+    before { linkedin.set_request_session(request, session) }
 
-    it 'sets up the linkedin.req_token' do
-      expect(linkedin.req_token).to eq req_token
+    it 'sets the sessions rtoken' do
+      expect(session[:rtoken]).to eq 'TOKEN'
     end
 
-    it 'has a token' do
-      expect(req_token.token).to eq 'TOKEN'
-    end
-
-    it 'has a secret' do
-      expect(req_token.secret).to eq 'SECRET'
+    it 'sets the sessions rsecret' do
+      expect(session[:rsecret]).to eq 'SECRET'
     end
 
     describe '#authorize_url' do
