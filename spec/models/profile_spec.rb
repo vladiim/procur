@@ -13,21 +13,34 @@ end
 require_relative '../../models/profile'
 
 RSpec.describe Profile do
-  let(:client) { OpenStruct.new(profile: profile_data) }
+  let(:client) { OpenStruct.new(profile: profile_data, consumer_token: 'CONSUMER TOKEN') }
 
-  describe '.new_from_linkedin' do
-    let(:profile) { Profile.new_from_linkedin(client) }
+  describe '.from_linkedin' do
+    let(:profile) { Profile.from_linkedin(client) }
 
-    it 'returns a profile instance' do
-      expect(profile).to be_a Profile
+    before { allow(Profile).to receive(:first) { nil } }
+
+    context 'new profile' do
+      it 'returns a profile instance' do
+        expect(profile).to be_a Profile
+      end
+
+      it 'sets up the correct variables' do
+        expect(profile.values[:linkedin_token]).to eq 'CONSUMER TOKEN'
+        expect(profile.values[:surname]).to eq 'LAST NAME'
+        expect(profile.values[:headline]).to eq 'HEADLINE'
+        expect(profile.values[:linkedin_url]).to eq 'URL'
+        expect(profile.values[:created_at]).to be
+      end
     end
 
-    it 'sets up the correct variables' do
-      expect(profile.values[:name]).to eq 'FIRST NAME'
-      expect(profile.values[:surname]).to eq 'LAST NAME'
-      expect(profile.values[:headline]).to eq 'HEADLINE'
-      expect(profile.values[:linkedin_url]).to eq 'URL'
-      expect(profile.values[:created_at]).to be
+    context 'existing linkedin profile' do
+      it 'returns the old profile' do
+        old_profile = Object.new
+        args = { linkedin_token: 'CONSUMER TOKEN' }
+        expect(Profile).to receive(:first).with(args) { old_profile }
+        expect(profile).to eq old_profile
+      end
     end
   end
 
