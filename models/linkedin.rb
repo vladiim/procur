@@ -21,7 +21,6 @@ class Linkedin
     return if session[:atoken]
     rtoken = session.fetch(:rtoken)
     rsecret = session.fetch(:rsecret)
-    # require 'debugger'; debugger
     auth = client.authorize_from_request(rtoken, rsecret, pin)
     session[:atoken] = auth[0]
     session[:asecret] = auth[1]

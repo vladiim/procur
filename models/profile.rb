@@ -16,6 +16,7 @@ class Profile < Sequel::Model
   private
 
   def self.new_profile(profile_data, token)
+    # client.picture_urls
     new(
       name: profile_data.first_name,
       surname: profile_data.last_name,
