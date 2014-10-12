@@ -1,3 +1,4 @@
+
 Procur::App.controllers :auth do
 
   get :auth, map: '/auth' do
@@ -11,11 +12,11 @@ Procur::App.controllers :auth do
     linkedin.set_auth_session(session, params[:oauth_verifier])
     client = linkedin.client
     profile = Profile.from_linkedin(client)
-    # require 'debugger'; debugger
-    companies = Company.from_linkedin(client)
+    require 'debugger'; debugger
+    profile.positions_from_linkedin(client)
+    # companies = Company.from_linkedin(client)
     # TODO: add start date and position to profile_companies
-    profile.companies = companies
-    profile.save
+    # profile.companies = companies
     redirect profile.url
   end
 

@@ -1,6 +1,21 @@
 RACK_ENV = 'test'
 require 'rspec'
 require 'ostruct'
+
+module Sequel
+  class Model
+
+    def self.create(*args)
+      new(*args)
+    end
+
+    attr_accessor :values
+    def initialize(*args)
+      @values = args[0]
+    end
+  end
+end
+
 # require File.expand_path(File.dirname(__FILE__) + "/../config/boot")
 # Dir[File.expand_path(File.dirname(__FILE__) + "/../app/helpers/**/*.rb")].each(&method(:require))
 

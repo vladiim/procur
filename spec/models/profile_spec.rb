@@ -1,19 +1,11 @@
 require 'spec_helper'
 require_relative '../../models/string_helper'
 
-module Sequel
-  class Model
-    attr_accessor :values
-    def initialize(*args)
-      @values = args[0]
-    end
-  end
-end
-
 require_relative '../../models/profile'
 
 RSpec.describe Profile do
   let(:client) { OpenStruct.new(profile: profile_data, consumer_token: 'CONSUMER TOKEN') }
+  let(:profile) { Profile.new }
 
   describe '.from_linkedin' do
     let(:profile) { Profile.from_linkedin(client) }
@@ -45,16 +37,14 @@ RSpec.describe Profile do
   end
 
   context 'basic profile' do
-    let(:profile) { Profile.new }
-
     before do
-      profile.stub(:name) { 'NAME' }
-      profile.stub(:surname) { 'SUR NAME' }
+      allow(profile).to receive(:name) { 'NAME' }
+      allow(profile).to receive(:surname) { 'SUR NAME' }
     end
 
     describe '#url' do
       it "returns the profile's show url" do
-        profile.stub(:id) { 1 }
+        allow(profile).to receive(:id) { 1 }
         expect(profile.url).to eq '/profiles/1/name-sur-name'
       end
     end
@@ -63,7 +53,41 @@ RSpec.describe Profile do
       it 'combines the name and surname' do
         expect(profile.fullname).to eq "Name Sur Name"
       end
+    end
   end
+
+  describe '#positions_from_linkedin' do
+    let(:position) { OpenStruct.new }
+    let(:client) { ClientStub.new(position) }
+
+    it 'creates a new position object for each position' do
+      expect(Position).to receive(:from_linkedin).with(position)
+      profile.positions_from_linkedin(client)
+    end
+  end
+end
+
+class ClientStub < OpenStruct
+  attr_reader :position
+  def initialize(position)
+    @position = position
+  end
+
+  def profile(something)
+    self
+  end
+
+  def positions
+    self
+  end
+
+  def all
+    [position]
+  end
+end
+
+class Position
+  def self.from_linkedin(position)
   end
 end
 
