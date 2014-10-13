@@ -14,6 +14,9 @@ module Sequel
       @values = args[0]
     end
   end
+
+  def one_to_many(*args)
+  end
 end
 
 # require File.expand_path(File.dirname(__FILE__) + "/../config/boot")

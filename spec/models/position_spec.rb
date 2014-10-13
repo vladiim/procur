@@ -3,10 +3,9 @@ require_relative '../../models/position'
 
 RSpec.describe Position do
   let(:data) { PositionData.new }
+  let(:position) { Position.from_linkedin(data, 1, CompanyStub) }
 
   describe '.from_linkedin' do
-    let(:position) { Position.from_linkedin(data) }
-
     before { allow(Position).to receive(:first) { nil } }
 
     context 'new position' do
@@ -15,6 +14,7 @@ RSpec.describe Position do
       end
 
       it 'sets up the correct variables' do
+        expect(position.values[:profile_id]).to eq 1
         expect(position.values[:linkedin_id]).to eq 2
         expect(position.values[:is_current]).to eq true
         expect(position.values[:title]).to eq 'TITLE'
@@ -29,7 +29,20 @@ RSpec.describe Position do
         expect(position).to eq old_position
       end
     end
+
+    it 'finds or creates a company from linkedin' do
+      expect(CompanyStub).to receive(:from_linkedin).with('COMPANY')
+      position
+    end
+
+    it 'saves the company to itself', focus: true do
+      expect(position.company).to be_a CompanyStub
+    end
   end
+end
+
+class CompanyStub
+  def self.from_linkedin(blah); new; end
 end
 
 class PositionData
@@ -45,9 +58,6 @@ class PositionData
   end
 
   def company
-    OpenStruct.new(
-      id: 1, industry: 'INDUSTRY', name: 'NAME',
-      size: 'SIZE', employees: 'EMPLOYEES', type: 'TYPE'
-    )
+    'COMPANY'
   end
 end

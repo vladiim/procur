@@ -1,6 +1,11 @@
 require 'spec_helper'
 require_relative '../../models/string_helper'
 
+class Profile < Sequel::Model
+  def self.one_to_many(*args); end
+  def id; 1;end
+end
+
 require_relative '../../models/profile'
 
 RSpec.describe Profile do
@@ -61,8 +66,18 @@ RSpec.describe Profile do
     let(:client) { ClientStub.new(position) }
 
     it 'creates a new position object for each position' do
-      expect(Position).to receive(:from_linkedin).with(position)
-      profile.positions_from_linkedin(client)
+      expect(PositionStub).to receive(:from_linkedin).with(position, 1)
+      profile.positions_from_linkedin(client, PositionStub)
+    end
+
+    it 'returns a position array' do
+      result = profile.positions_from_linkedin(client, PositionStub)
+      expect(result).to eq ["LinkedIn #{ position }"]
+    end
+
+    it 'stores the positions' do
+      profile.positions_from_linkedin(client, PositionStub)
+      expect(profile.positions).to eq ["LinkedIn #{ position }"]
     end
   end
 end
@@ -86,8 +101,9 @@ class ClientStub < OpenStruct
   end
 end
 
-class Position
-  def self.from_linkedin(position)
+class PositionStub
+  def self.from_linkedin(position, id)
+    "LinkedIn #{ position }"
   end
 end
 
