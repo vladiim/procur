@@ -9,7 +9,7 @@ end
 require_relative '../../models/profile'
 
 RSpec.describe Profile do
-  let(:client) { OpenStruct.new(profile: profile_data, consumer_token: 'CONSUMER TOKEN') }
+  let(:client) { ClientStub.new }
   let(:profile) { Profile.new }
 
   describe '.from_linkedin' do
@@ -24,6 +24,7 @@ RSpec.describe Profile do
 
       it 'sets up the correct variables' do
         expect(profile.values[:linkedin_token]).to eq 'CONSUMER TOKEN'
+        expect(profile.values[:email]).to eq 'EMAIL ADDRESS'
         expect(profile.values[:surname]).to eq 'LAST NAME'
         expect(profile.values[:headline]).to eq 'HEADLINE'
         expect(profile.values[:linkedin_url]).to eq 'URL'
@@ -81,21 +82,24 @@ end
 
 class ClientStub < OpenStruct
   attr_reader :position
-  def initialize(position)
+  def initialize(position=Object.new)
     @position = position
   end
 
-  def profile(something)
-    self
+  def profile(something='PROFILE')
+    case something
+    when { fields: ['email-address']}
+      OpenStruct.new(email_address: 'EMAIL ADDRESS')
+    when { fields: ['positions']}
+      self
+    else
+      profile_data
+    end
   end
 
-  def positions
-    self
-  end
-
-  def all
-    [position]
-  end
+  def positions; self; end
+  def all; [position]; end
+  def consumer_token; 'CONSUMER TOKEN'; end
 end
 
 class PositionStub

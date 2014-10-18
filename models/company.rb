@@ -6,6 +6,10 @@ class Company < Sequel::Model
     company ? company : create_company(company_data)
   end
 
+  def url
+    "/companies/#{ id }/#{ StringHelper.urlise(name) }"
+  end
+
   private
 
   def self.create_company(company_data)

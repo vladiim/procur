@@ -3,15 +3,18 @@ require 'spec_helper'
 class Company < Sequel::Model
   def self.one_to_many(*args); end
   def id; 1;end
+  def name; 'COMPANY NAME'; end
 end
 
+require_relative '../../models/string_helper'
 require_relative '../../models/company'
 
 RSpec.describe Company do
+  let(:company) { Company.new }
+
   describe '.from_linkedin' do
     let(:data) { CompanyData.new }
     let(:company) { Company.from_linkedin(data) }
-
     before { allow(Company).to receive(:first) { nil } }
 
     it 'returns a company object' do
@@ -33,6 +36,12 @@ RSpec.describe Company do
         expect(company.values[:industry]).to eq 'INDUSTRY'
         expect(company.values[:name]).to eq 'NAME'
       end
+    end
+  end
+
+  describe '#url' do
+    it 'constructs a url based on the id and name' do
+      expect(company.url).to eq '/companies/1/company-name'
     end
   end
 end

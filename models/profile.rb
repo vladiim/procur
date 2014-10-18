@@ -3,7 +3,9 @@ class Profile < Sequel::Model
 
   def self.from_linkedin(client)
     profile = Profile.first(linkedin_token: client.consumer_token)
-    profile ? profile : create_profile(client.profile, client.consumer_token)
+    return profile if profile
+    email = client.profile(fields: ['email-address']).email_address
+    create_profile(client.profile, client.consumer_token, email)
   end
 
   def positions_from_linkedin(client, position_class = Position)
@@ -22,11 +24,12 @@ class Profile < Sequel::Model
 
   private
 
-  def self.create_profile(profile_data, token)
+  def self.create_profile(profile_data, token, email)
     # client.picture_urls
     create(
       name: profile_data.first_name,
       surname: profile_data.last_name,
+      email: email,
       headline: profile_data.headline,
       linkedin_url: profile_data.site_standard_profile_request.url,
       linkedin_token: token,
