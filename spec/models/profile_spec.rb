@@ -64,6 +64,8 @@ RSpec.describe Profile do
   describe '#positions_from_linkedin' do
     let(:position) { OpenStruct.new }
     let(:client) { ClientStub.new(position) }
+    let(:positions) { [] }
+    before { allow(profile).to receive(:positions) { positions } }
 
     it 'creates a new position object for each position' do
       expect(PositionStub).to receive(:from_linkedin).with(position, 1)
@@ -72,12 +74,7 @@ RSpec.describe Profile do
 
     it 'returns a position array' do
       result = profile.positions_from_linkedin(client, PositionStub)
-      expect(result).to eq ["LinkedIn #{ position }"]
-    end
-
-    it 'stores the positions' do
-      profile.positions_from_linkedin(client, PositionStub)
-      expect(profile.positions).to eq ["LinkedIn #{ position }"]
+      expect(result).to eq positions
     end
   end
 end
@@ -103,7 +100,6 @@ end
 
 class PositionStub
   def self.from_linkedin(position, id)
-    "LinkedIn #{ position }"
   end
 end
 

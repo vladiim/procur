@@ -13,10 +13,6 @@ Procur::App.controllers :auth do
     client = linkedin.client
     profile = Profile.from_linkedin(client)
     profile.positions_from_linkedin(client)
-    require 'debugger'; debugger
-    # companies = Company.from_linkedin(client)
-    # TODO: add start date and position to profile_companies
-    # profile.companies = companies
     redirect profile.url
   end
 

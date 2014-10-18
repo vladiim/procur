@@ -1,8 +1,9 @@
+/ %a{ href: "#{ item.url }", class: 'list-group-item' }
 %a{ href: '/companies/1/holler', class: 'list-group-item' }
   .heading
     %h3.list-group-item-heading
       %span{ class: 'label label-default' } 8
-      Holler
+      %span= item.name
     %p We solve business problems by provoking big reactions from simple interactions.
   .meta
     %small
