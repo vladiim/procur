@@ -3,7 +3,7 @@ $( document ).ready( ->
   $( '.service' ).on 'click', ( event ) ->
     $target = $( event.target )
     service = $target.data( 'service' )
-    $( ".#{ service }-votes" ).toggleClass 'hidden'
+    $( ".#{ service }-show" ).toggleClass 'hidden'
 
   $( '.profile-pic' ).popover({
     title: '<a href="/">Vlad Mehakovic</a>',

@@ -20,12 +20,14 @@ gem 'linkedin', '~> 1.0.0'
 
 # Test
 group :test do
-  gem 'rspec',       '~> 3.1.0'
-  gem 'rack-test',   '~> 0.6.2', require: 'rack/test'
-  gem 'capybara',    '~> 2.4.1'
-  gem 'launchy',     '~> 2.4.2'
-  gem 'poltergeist', '~> 1.5.1'
-  gem 'webmock',     '~> 1.19.0'
+  gem 'rspec',        '~> 3.1.0'
+  gem 'rack-test',    '~> 0.6.2', require: 'rack/test'
+  gem 'capybara',     '~> 2.4.1'
+  gem 'launchy',      '~> 2.4.2'
+  gem 'poltergeist',  '~> 1.5.1'
+  gem 'webmock',      '~> 1.19.0'
+  gem 'factory_girl', '~> 4.5.0'
+  gem 'rack_session_access', '0.1.1'
 end
 
 # Development/ test helper gems

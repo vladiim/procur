@@ -3,6 +3,7 @@ require_relative '../../models/string_helper'
 
 class Profile < Sequel::Model
   def self.one_to_many(*args); end
+  def self.many_to_many(*args); end
   def id; 1;end
 end
 
@@ -76,6 +77,21 @@ RSpec.describe Profile do
     it 'returns a position array' do
       result = profile.positions_from_linkedin(client, PositionStub)
       expect(result).to eq positions
+    end
+  end
+
+  describe '.logged_in_profile' do
+    it 'sets the logged_in_profile' do
+      profile = Profile.new
+      Profile.logged_in_profile = profile
+      expect(Profile.logged_in_profile).to eq profile
+    end
+
+    context 'not a profile object' do
+      it 'raises an error' do
+        profile = Object.new
+        expect{ Profile.logged_in_profile = profile }.to raise_error Profile::NotProfileError
+      end
     end
   end
 end

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 class Company < Sequel::Model
   def self.one_to_many(*args); end
+  def self.many_to_many(*args); end
   def id; 1;end
   def name; 'COMPANY NAME'; end
 end
@@ -44,14 +45,48 @@ RSpec.describe Company do
       expect(company.url).to eq '/companies/1/company-name'
     end
   end
+
+  describe '#create_service' do
+    let(:result) { company.create_service('SERVICE', 'PROFILE ID', ServiceStub) }
+
+    context "service exists" do
+      it "doesn't create a new service" do
+        old_service = Object.new
+        attrs = { name: 'SERVICE' }
+        expect(ServiceStub).to receive(:where).with(attrs) { old_service }
+        expect(old_service).to receive(:first) { old_service }
+        expect(result).to eq old_service
+      end
+    end
+
+    context "service doesn't exist" do
+      before do
+        sequel = Object.new
+        expect(ServiceStub).to receive(:where) { sequel }
+        expect(sequel).to receive(:first) { nil }
+        allow(company).to receive(:id) { 'COMPANY ID' }
+      end
+
+      it "sets the service's variables" do
+        service = result
+        expect(service.company_id).to eq 'COMPANY ID'
+        expect(service.name).to eq 'SERVICE'
+      end
+    end
+  end
 end
 
 class CompanyData
-
   attr_reader :id, :industry, :name
   def initialize
     @id = 'LINKEDIN ID'
     @industry = 'INDUSTRY'
     @name = 'NAME'
+  end
+end
+
+class ServiceStub < OpenStruct
+  def self.create_for_vote(name, id, profile_id)
+    new(name: name, company_id: id, profile_id: profile_id)
   end
 end

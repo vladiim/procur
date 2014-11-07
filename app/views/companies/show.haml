@@ -2,7 +2,7 @@
   .col-xs-3
     %img{ 'data-src' => 'holder.js/100%x150/auto', class: 'responsive-img' }
   .col-xs-9
-    %h1= @name
+    %h1= @company.name
     %p We solve business problems by provoking big reactions from simple interactions.
     %ul
       %li
@@ -30,35 +30,22 @@
 %hr
 
 .add-expertise.container
-  %h3= "What's #{ @name } good at?"
+  %h3= "What's #{ @company.name } good at?"
+%hr
 
-  %form{ role: 'form' }
-    .form-group
-      %label Add expertise
-      .input-group
-        %input{ type: 'text', class: 'form-control', placeholder: 'Digital' }
-        %span.input-group-btn
-          %button{ type: 'submit', class: 'btn btn-default' } Add
+= partial 'services/vote_item'
 
 %hr
 
 .service.container
   .title
-    %h3{ 'data-service' => 'customer-experience' }
-      %a{ class: 'btn btn-default btn-vote' }
-        %span{ class: 'glyphicon glyphicon-arrow-up' }
-        %b 8
-      Customer experience
+    %h3{ 'data-service' => 'add-service' }
+      %span{ class: 'glyphicon glyphicon-pencil' }
+      Add service
 
-  %div{ class: 'customer-experience-votes hidden' }
-    .col-sm-6
-      %h5 5 staff votes
-      - 5.times do
-        %img{ 'data-src' => 'holder.js/50x50', class: 'img-circle profile-pic' }
-
-    .col-sm-6
-      %h5 3 client votes
-      - 3.times do
-        %img{ 'data-src' => 'holder.js/50x50', class: 'img-circle profile-pic' }
-
-%hr
+  %div{ class: 'add-service-show accordion hidden' }
+    = form_tag "/services/from-company/#{ @company.id }", role: 'form' do
+      = field_set_tag(class: 'form-group') do
+        = text_field_tag :service, class: 'add-service-input form-control', id: 'add-service-input', placeholder: 'Digital'
+      = field_set_tag(class: 'buttons') do
+        %button{ type: 'submit', class: 'btn btn-default' } Add

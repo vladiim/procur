@@ -1,0 +1,18 @@
+.service.container
+  .title
+    %h3{ 'data-service' => 'customer-experience' }
+      %a{ class: 'btn btn-default btn-vote' }
+        %span{ class: 'glyphicon glyphicon-arrow-up' }
+        %b 8
+      Customer experience
+
+  %div{ class: 'customer-experience-show accordion hidden' }
+    .col-sm-6
+      %h5 5 staff votes
+      - 5.times do
+        %img{ 'data-src' => 'holder.js/50x50', class: 'img-circle profile-pic' }
+
+    .col-sm-6
+      %h5 3 client votes
+      - 3.times do
+        %img{ 'data-src' => 'holder.js/50x50', class: 'img-circle profile-pic' }

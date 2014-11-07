@@ -1,6 +1,9 @@
 class Profile < Sequel::Model
   one_to_many :positions
 
+  many_to_many :services, join_table: :votes
+  many_to_many :companies, join_table: :votes
+
   def self.from_linkedin(client)
     profile = Profile.first(linkedin_token: client.consumer_token)
     return profile if profile
@@ -21,6 +24,17 @@ class Profile < Sequel::Model
   def fullname
     "#{ StringHelper.camelise(name) } #{ StringHelper.camelise(surname) }"
   end
+
+  # class << self
+  #   attr_reader :logged_in_profile
+  # end
+
+  # def self.logged_in_profile=(profile)
+  #   return @logged_in_profile = profile if profile.is_a? Profile
+  #   raise NotProfileError, "#{ profile } is not a Profile"
+  # end
+
+  # class NotProfileError < StandardError; end
 
   private
 

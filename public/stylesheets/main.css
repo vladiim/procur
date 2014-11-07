@@ -8,6 +8,9 @@
 .btn-vote {
   padding: 5px 10px 5px 5px; }
 
+.btn-100 {
+  width: 100%; }
+
 .show-card {
   padding: 10px; }
   .show-card h1 {
@@ -26,6 +29,8 @@
   margin: -10px; }
   .service .title:hover {
     background-color: #f5f5f5; }
+.service .accordion {
+  margin-top: 15px; }
 
 a.linkedin {
   width: 100%; }
