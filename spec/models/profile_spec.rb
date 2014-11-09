@@ -80,18 +80,12 @@ RSpec.describe Profile do
     end
   end
 
-  describe '.logged_in_profile' do
-    it 'sets the logged_in_profile' do
-      profile = Profile.new
-      Profile.logged_in_profile = profile
-      expect(Profile.logged_in_profile).to eq profile
-    end
-
-    context 'not a profile object' do
-      it 'raises an error' do
-        profile = Object.new
-        expect{ Profile.logged_in_profile = profile }.to raise_error Profile::NotProfileError
-      end
+  describe '#vote_for' do
+    it 'creates a new vote' do
+      # service_id, company_id
+      args = { profile_id: 1, service_id: 'SERVICE ID', company_id: 'COMPANY ID'}
+      expect(VoteStub).to receive(:create).with(args)
+      profile.vote_for('SERVICE ID', 'COMPANY ID', VoteStub)
     end
   end
 end
@@ -121,6 +115,9 @@ end
 class PositionStub
   def self.from_linkedin(position, id)
   end
+end
+
+class VoteStub
 end
 
 def profile_data

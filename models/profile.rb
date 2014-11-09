@@ -25,16 +25,10 @@ class Profile < Sequel::Model
     "#{ StringHelper.camelise(name) } #{ StringHelper.camelise(surname) }"
   end
 
-  # class << self
-  #   attr_reader :logged_in_profile
-  # end
-
-  # def self.logged_in_profile=(profile)
-  #   return @logged_in_profile = profile if profile.is_a? Profile
-  #   raise NotProfileError, "#{ profile } is not a Profile"
-  # end
-
-  # class NotProfileError < StandardError; end
+  def vote_for(service_id, company_id, vote_class = Vote)
+    vote_class.create(profile_id: id,
+      service_id: service_id, company_id: company_id)
+  end
 
   private
 

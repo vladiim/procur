@@ -2,7 +2,7 @@ require 'capybara/rspec'
 require 'factory_girl'
 require 'rack_session_access/capybara'
 
-RACK_ENV = 'test'
+RACK_ENV='test'
 
 require File.expand_path(File.dirname(__FILE__) + "/../../config/boot")
 
@@ -55,7 +55,9 @@ FactoryGirl.find_definitions
 
 # # Enable given/when/then syntax
 def convert_to_meth(statement, helper_obj = nil)
-  method = statement.gsub(' ', '_').downcase.to_sym
+  method = statement.gsub(' ', '_').
+    gsub('\'', '').
+    downcase.to_sym
   send method, helper_obj
 end
 

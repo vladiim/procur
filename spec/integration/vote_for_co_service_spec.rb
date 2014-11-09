@@ -41,7 +41,9 @@ def see_digital_on_the_page(helper)
 end
 
 def have_voted_for_the_digital_service(helper)
-  within('.btn-vote') do
-    expect(page).to have_content '1'
+  within('#voted_items_digital') do
+    within('.btn-vote') do
+      expect(page).to have_content '1'
+    end
   end
 end

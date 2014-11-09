@@ -75,9 +75,11 @@ RSpec.describe Company do
     end
   end
 
-  describe '#voted_services', focus: true do
+  describe '#voted_services' do
     it 'returns the services people have voted for the company' do
-      expect(company.voted_services(VoteStub, ServiceStub)).to eq ['VOTED SERVICES']
+      expect(VoteStub).to receive(:where) { VoteStub }
+      expect(VoteStub).to receive(:all) { [OpenStruct.new(service_id: 'SERVICE ID')] }
+      company.voted_services(VoteStub, ServiceStub)
     end
   end
 end
@@ -103,10 +105,9 @@ end
 
 class VoteStub
   def self.where(args)
-    self
+    # self
   end
 
   def self.all
-    [OpenStruct.new(service_id: 'SERVICE ID')]
   end
 end

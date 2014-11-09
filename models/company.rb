@@ -21,8 +21,6 @@ class Company < Sequel::Model
   def voted_services(vote_class = Vote, service_class = Service)
     vote_class.where(company_id: id).
       all.map { |vote| service_class[vote.service_id] }
-    # Service[vote.service_id]
-    # Vote.where(company_id: id)
   end
 
   private
