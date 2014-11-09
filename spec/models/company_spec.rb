@@ -74,6 +74,12 @@ RSpec.describe Company do
       end
     end
   end
+
+  describe '#voted_services', focus: true do
+    it 'returns the services people have voted for the company' do
+      expect(company.voted_services(VoteStub, ServiceStub)).to eq ['VOTED SERVICES']
+    end
+  end
 end
 
 class CompanyData
@@ -88,5 +94,19 @@ end
 class ServiceStub < OpenStruct
   def self.create_for_vote(name, id, profile_id)
     new(name: name, company_id: id, profile_id: profile_id)
+  end
+
+  def self.[](args)
+    'VOTED SERVICES' if args == 'SERVICE ID'
+  end
+end
+
+class VoteStub
+  def self.where(args)
+    self
+  end
+
+  def self.all
+    [OpenStruct.new(service_id: 'SERVICE ID')]
   end
 end
