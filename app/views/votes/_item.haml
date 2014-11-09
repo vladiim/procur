@@ -3,8 +3,8 @@
     %h3{ 'data-service' => 'customer-experience' }
       %a{ class: 'btn btn-default btn-vote' }
         %span{ class: 'glyphicon glyphicon-arrow-up' }
-        %b 8
-      Customer experience
+        %b= item.vote_count
+      = item.name
 
   %div{ class: 'customer-experience-show accordion hidden' }
     .col-sm-6

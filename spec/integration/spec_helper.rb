@@ -6,32 +6,18 @@ RACK_ENV = 'test'
 
 require File.expand_path(File.dirname(__FILE__) + "/../../config/boot")
 
-# Capybara.app = Padrino.application
-
 # Sequel doesn't have the #save! method
 class Sequel::Model
   alias_method :save!, :save
 end
 
-Procur::App.controllers :spec_helper do
-  get :show, map: '/spec_helper/session/' do
-    'GET SHOW WOO!'
-  end
-
-  put :update, map: '/spec_helper/session/:data' do
-    require 'debugger'; debugger
-    render 'worked!'
-  end
-end
-
 # Be able to access the rack session
 Procur::App.configure do |app|
-  # require 'debugger'; debugger
   app.use RackSessionAccess::Middleware
   app.protection = false
   app.disable :protection
-  # app.protect_from_csrf = false
-  # app.allow_disabled_csrf = true
+  app.protect_from_csrf = false
+  app.allow_disabled_csrf = true
 end
 
 Capybara.app = Procur::App
@@ -78,6 +64,10 @@ def given_i(statement, helper_obj = nil)
 end
 
 def and_i(statement, helper_obj = nil)
+  convert_to_meth(statement, helper_obj)
+end
+
+def and_also(statement, helper_obj = nil)
   convert_to_meth(statement, helper_obj)
 end
 

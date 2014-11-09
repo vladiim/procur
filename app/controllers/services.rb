@@ -4,7 +4,7 @@ Procur::App.controllers :services do
   end
 
   get :show, map: '/services/:name' do
-    @name = StringHelper.titleise(params[:name])
+    # @name = StringHelper.titleise(params[:name])
     @company = Company.first
     render 'services/show'
   end

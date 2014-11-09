@@ -33,7 +33,7 @@
   %h3= "What's #{ @company.name } good at?"
 %hr
 
-= partial 'services/vote_item'
+= partial 'votes/item', collection: @company.services
 
 %hr
 

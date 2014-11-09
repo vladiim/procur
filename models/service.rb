@@ -10,4 +10,10 @@ class Service < Sequel::Model
       profile_id: profile_id)
     service
   end
+
+  def vote_count(vote_class = Vote)
+    vote_class.group_and_count(:service_id).
+      where(service_id: id).
+      all.count
+  end
 end
